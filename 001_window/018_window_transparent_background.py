@@ -32,7 +32,7 @@ class MessageLabel(ttk.Label):
 	def __init__(self, parent):
 		super().__init__(parent)
 		# object attributes
-		self.text = "Only the alpha channel of the image is transparent."
+		self.text = "The alpha channel of the image is transparent."
 		self.width = len(self.text) # width is in characters
 		self.photo = RelativeImagePath.get_path("images/example.png")
 		# configure
