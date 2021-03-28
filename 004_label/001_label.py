@@ -4,18 +4,18 @@ from tkinter import ttk
 def main():
 	window = Window()
 	window.mainloop()
-
+	
 class Window(Tk):
 	def __init__(self):
 		super().__init__()
 		# object attributes
-		self.width = 310
+		self.title("A Simple Label")
+		self.width = 260
 		self.height = 100
 		# configure
-		self.title("Basic Button with Callback")
 		self.config(width = self.width, height = self.height)
 		self.grid_propagate(False)
-		#populate
+		# populate
 		mainframe = MainFrame(self)
 
 class MainFrame(ttk.Frame):
@@ -24,21 +24,18 @@ class MainFrame(ttk.Frame):
 		# configure
 		self.grid()
 		# populate
-		hello_button = HelloButton(self)
+		hello_label = SimpleLabel(self)
 		# layout
-		hello_button.grid()
+		hello_label.grid()
 
-class HelloButton(ttk.Button):
-	def __init__(self, frame):
-		super().__init__(frame)
+class SimpleLabel(ttk.Label):
+	def __init__(self, window):
+		super().__init__(window)
 		# object attributes
-		self.text = "Say Hello"
-		self.message = "Hello, tkinter World!"
+		self.text = "Definitely a Simple Label"
 		# configure
-		self.config(text = self.text, command = self.say_hello)
+		self.config(text = self.text)
 
-	def say_hello(self):
-		print(self.message)
-	
+
 if __name__ == "__main__":
 	main()

@@ -10,20 +10,18 @@ class Window(Tk):
 		super().__init__()
 		# object attributes
 		self.title("A Centered Frame, No Children")
-		self.width = 450
-		self.height = 300
+		self.size = "450x300"
 		# configure
-		self.config(width = self.width, height = self.height)
+		self.geometry(self.size)
 		self.grid_propagate(False)
-		#self.rowconfigure(0, weight = 1)
-		#self.columnconfigure(0, weight = 1)
 		#populate
 		mainframe = MainFrame(self)
-		self.center_all(mainframe)
+		# post config
 		
+		self.center_all(mainframe)
+
 	def center_all(self, widget):
 		# centering
-		widget.grid(column = 0, row = 0)
 		widget.update() # After the UI is drawn, winfo_ will have accurate dimensions.
 		xbias = (self.winfo_width() - widget.winfo_width()) / 2
 		ybias = (self.winfo_height() - widget.winfo_height()) / 2

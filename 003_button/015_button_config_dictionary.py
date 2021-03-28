@@ -12,7 +12,7 @@ class Window(Tk):
 		self.width = 310
 		self.height = 100
 		# configure
-		self.title("Basic Button with Callback")
+		self.title("Button Config Dictionary")
 		self.config(width = self.width, height = self.height)
 		self.grid_propagate(False)
 		#populate
@@ -24,21 +24,29 @@ class MainFrame(ttk.Frame):
 		# configure
 		self.grid()
 		# populate
-		hello_button = HelloButton(self)
+		dictionary_button = DictionaryButton(self)
 		# layout
-		hello_button.grid()
+		dictionary_button.grid()
 
-class HelloButton(ttk.Button):
+class DictionaryButton(ttk.Button):
 	def __init__(self, frame):
 		super().__init__(frame)
 		# object attributes
-		self.text = "Say Hello"
-		self.message = "Hello, tkinter World!"
+		self.text = "Print Config Dictionary"
+		self.message = "Button things that can be configured:"
 		# configure
-		self.config(text = self.text, command = self.say_hello)
+		self.config(text = self.text, command = self.print_config_dictionary)
 
-	def say_hello(self):
+	def print_config_dictionary(self):
 		print(self.message)
+		self.print_config_list()
+		
+	def print_config_list(self):
+		config_dict = self.config()
+		
+		for key, value_set in config_dict.items():
+			print(f"{key} : {value_set}")
+
 	
 if __name__ == "__main__":
 	main()

@@ -8,12 +8,6 @@ def main():
 class MainFrame(ttk.Frame):
 	def __init__(self, master = None):
 		super().__init__(master)
-		self.width = 300
-		self.height = 50
-		# configure
-		self.config(width = self.width, height = self.height)
-		self.master.title('Frame without Window')
-		self.config(borderwidth = 2, relief = "raised")
 		self.grid()
 
 		

@@ -15,11 +15,11 @@ class Window(Tk):
 		self.size: str
 		self.title_text = "Specify Window Position"
 		# configure
-		self.size = self.set_size(self.width, self.height , self.x_pos, self.y_pos)
+		self.size = self.set_size_position(self.width, self.height , self.x_pos, self.y_pos)
 		self.geometry(self.size)
 		self.title(self.title_text)
 		
-	def set_size(self, width: int, height: int, x_pos: int, y_pos: int):
+	def set_size_position(self, width: int, height: int, x_pos: int, y_pos: int):
 		'''
 		Build a size and placement string from integers.
 		The output format will be: width+height<+/->x_pos<+/->y_pos

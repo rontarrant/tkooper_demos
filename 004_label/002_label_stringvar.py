@@ -10,6 +10,8 @@ class Window(Tk):
 		super().__init__()
 		# object attributes
 		self.title("Button Binary Choices")
+		# configure
+		self.grid_propagate(False)
 		# populate
 		mainframe = MainFrame(self)
 

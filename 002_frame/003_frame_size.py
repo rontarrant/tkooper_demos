@@ -9,12 +9,9 @@ class Window(Tk):
 	def __init__(self):
 		super().__init__()
 		# object attributes
-		self.title("A Sized Frame, No Children")
-		self.width = 450
-		self.height = 300
+		self.size = "200x300"
 		# configure
-		self.config(width = self.width, height = self.height)
-		self.grid_propagate(False)
+		self.geometry(self.size)
 		#populate
 		mainframe = MainFrame(self)
 
@@ -22,13 +19,11 @@ class MainFrame(ttk.Frame):
 	def __init__(self, window):
 		super().__init__(window)
 		# object attributes
-		self.width: int = 400
-		self.height: int = 250
+		self.width = 450
+		self.height = 300
 		# configure
-		self.config(padding = "20 10 20 20")
-		self.grid(column = 0, row = 0, sticky = (N, W, E, S))
 		self.config(width = self.width, height = self.height)
-		self.config(borderwidth = 2, relief = "groove")
+		self.grid()
 		# populate
 		# layout
 
