@@ -39,8 +39,7 @@ class QuitButton(ttk.Button):
 		self.config(text = self.text, command = self.quit)
 
 	def quit(self):
-		# do someting
-		self.top_window.quit()
+		self.top_window.quit() # simulate clicking the window's Close button
 		
 if __name__ == "__main__":
 	main()

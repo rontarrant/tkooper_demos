@@ -39,7 +39,6 @@ class QuitButton(ttk.Button):
 		self.config(text = self.text, command = self.quit)
 
 	def quit(self):
-		# do someting
 		self.top_window.quit()
 		
 if __name__ == "__main__":

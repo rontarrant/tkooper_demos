@@ -9,7 +9,7 @@ class Window(Tk):
 	def __init__(self):
 		super().__init__()
 		# configure
-		self.grid_propagate(False)
+		self.grid_propagate(False) # otherwise, window has no size at all
 		#populate
 		mainframe = MainFrame(self)
 

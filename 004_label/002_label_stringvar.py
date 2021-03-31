@@ -38,20 +38,22 @@ class ChangableLabel(ttk.Label):
 		# configure
 		self.config(textvariable = self.changeable)
 
+	def action(self):
+		if self.cget("text") == self.choices[0]:
+			self.changeable.set(self.choices[1])
+		else:
+			self.changeable.set(self.choices[0])
+
 class ChangeAgentButton(ttk.Button):
 	def __init__(self, parent, label):
 		super().__init__(parent)
 		# object attributes
 		self.text = "Say Hello"
-		self.label = label
 		# configure
-		self.config(text = self.text, command = self.say_hello)
+		self.config(text = self.text, command = lambda:self.make_change(label))
 
-	def say_hello(self):
-		if self.label.cget("text") == self.label.choices[0]:
-			self.label.changeable.set(self.label.choices[1])
-		else:
-			self.label.changeable.set(self.label.choices[0])
-
+	def make_change(self, label):
+		label.action()
+		
 if __name__ == "__main__":
 	main()

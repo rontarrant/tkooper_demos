@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-import os
+from relative import RelativePath
 
 def main():
 	window = Window()
@@ -38,14 +38,6 @@ class MessageLabel(ttk.Label):
 		# configure
 		self.config(text = self.text, image = self.photo, compound = 'bottom', width = self.width)
 		self.config(background = parent.master.cget('background'))
-
-class RelativePath:
-	def get_image_path(file_name):
-		current_directory = os.path.dirname(__file__)
-		path = os.path.join(current_directory, file_name)
-		relative_file_name = PhotoImage(file = path)
-
-		return relative_file_name
 
 
 if __name__ == "__main__":

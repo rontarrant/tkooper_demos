@@ -15,11 +15,11 @@ class Window(Tk):
 		self.size: str
 		self.title_text = "Specify Window Position"
 		# configure
-		self.size = self.set_size_position(self.width, self.height , self.x_pos, self.y_pos)
+		self.size = self.set_size_position()
 		self.geometry(self.size)
 		self.title(self.title_text)
 		
-	def set_size_position(self, width: int, height: int, x_pos: int, y_pos: int):
+	def set_size_position(self):
 		'''
 		Build a size and placement string from integers.
 		The output format will be: width+height<+/->x_pos<+/->y_pos
@@ -27,21 +27,21 @@ class Window(Tk):
 		x_offset: str
 		y_offset: str
 		size_position: str
-		
+
 		# If x_pos or y_pos is positive, we have to add a plus sign to the string.
 		# If either is negative, the sign will be part of the string created by the conversion.
-		if x_pos > 0:
+		if self.x_pos > 0:
 			x_offset = "+"
 		else:
 			x_offset = ""
 		
-		if y_pos > 0:
+		if self.y_pos > 0:
 			y_offset = "+"
 		else:
 			y_offset = ""
 		
 		# build the size and position string
-		size_position = str(width) + "x" + str(height) + x_offset + str(x_pos) + y_offset + str(y_pos)
+		size_position = str(self.width) + "x" + str(self.height) + x_offset + str(self.x_pos) + y_offset + str(self.y_pos)
 		
 		return size_position
 		

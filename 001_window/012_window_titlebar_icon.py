@@ -1,4 +1,5 @@
 from tkinter import *
+from relative import RelativePath
 
 def main():
 	window = Window()
@@ -9,11 +10,11 @@ class Window(Tk):
 		super().__init__()
 		# object attributes
 		self.title_text = "Title-bar Icon"
-		self.titlebar_icon = PhotoImage(file = "images/airport_25.png")
+		self.titlebar_image = RelativePath.get_image_path("images/airport_25.png")
 		self.width = 250
 		self.height = 200
 		# configure
-		self.iconphoto(False, self.titlebar_icon)
+		self.iconphoto(False, self.titlebar_image)
 		self.title(self.title_text)
 		self.config(width = self.width, height = self.height)
 
