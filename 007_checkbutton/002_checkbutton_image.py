@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from relative import RelativeImagePath
+from relative import RelativePath
 
 def main():
 	window = Window()
@@ -44,7 +44,7 @@ class FeatureCheckbutton(ttk.Checkbutton):
 		#object attributes
 		self.text = "Feature"
 		self.var = IntVar()
-		self.image = RelativeImagePath.get_path("images/head20x20.png")
+		self.image = RelativePath.get_image_path("images/head20x20.png")
 		# config
 		self.config(text = self.text, onvalue = 1, offvalue = 0, variable = self.var)
 		self.config(image = self.image, compound = "right", command = lambda:self.report(label))

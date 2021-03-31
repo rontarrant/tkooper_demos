@@ -33,12 +33,12 @@ class MessageLabel(ttk.Label):
 		# object attributes
 		self.text = "Everything transparent, even the titlebar."
 		self.width = len(self.text) # width is in characters
-		self.photo = RelativeImagePath.get_path("images/example.png")
+		self.photo = RelativePath.get_image_path("images/example.png")
 		# configure
 		self.config(text = self.text, image = self.photo, compound = 'bottom', width = self.width)
 
-class RelativeImagePath:
-	def get_path(file_name):
+class RelativePath:
+	def get_image_path(file_name):
 		current_directory = os.path.dirname(__file__)
 		path = os.path.join(current_directory, file_name)
 		relative_file_name = PhotoImage(file = path)

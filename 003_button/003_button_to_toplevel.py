@@ -9,9 +9,13 @@ class Window(Tk):
 	def __init__(self):
 		super().__init__()
 		# object attributes
+		self.delay = 2000 # 1000 = 1 second
 		self.title("Dynamic 'Hello' Button")
 		# populate
 		mainframe = MainFrame(self)
+	
+	def delayed_exit(self):
+		self.after(self.delay, self.destroy)
 
 class MainFrame(ttk.Frame):
 	def __init__(self, window):
@@ -20,50 +24,39 @@ class MainFrame(ttk.Frame):
 		self.grid(column = 0, row = 0, sticky = (N, W, E, S))
 		self.config(padding = "10 5 10 20")
 		# populate
-		hello_label = HelloLabel(self)
-		hello_button = HelloButton(self, hello_label)
-		goodbye_button = GoodbyeButton(self, hello_label)
+		message_label = MessageLabel(self)
+		goodbye_button = GoodbyeButton(self, message_label)
 		# layout
-		hello_label.grid(row = 0, column = 0, padx = 10, pady = 10, columnspan = 2)
-		hello_button.grid(row = 1, column = 0, padx = 10, pady = 10)
+		message_label.grid(row = 0, column = 0, padx = 10, pady = 10, columnspan = 2)
 		goodbye_button.grid(row = 1, column = 1, padx = 10, pady = 10)
 
-class HelloLabel(ttk.Label):	
+class MessageLabel(ttk.Label):	
 	def __init__(self, parent):
 		super().__init__(parent)
 		# object attributes
-		self.text = "Pick Your Choose"
+		self.hello_message = "Hello, World!"
+		self.good_bye_message = "I'm outta here!\n (Closing in 2 seconds)"
+		self.message = StringVar()
 		# configure
-		self.config(text = self.text)
+		self.message.set(self.hello_message)
+		self.config(textvariable = self.message)
+		
+	def update_(self):
+		self.message.set(self.good_bye_message)
+		self.winfo_toplevel().delayed_exit()
 
 class GoodbyeButton(ttk.Button):
 	def __init__(self, parent, label):
 		super().__init__(parent)
 		# object attributes
-		self.text = "Say Good-bye"
-		self.message = "Goodbye, World!\n (Closing in 2 seconds)"
-		self.delay = 2000 # 1000 = 1 second
+		self.label_text = "Say Good-bye"
 		self.label = label
-		self.window = self.winfo_toplevel() # access the top-level window from anywhere
 		# configure
-		self.config(text = self.text, command = self.say_goodbye)
+		self.config(text = self.label_text, command = self.say_goodbye)
 	
 	def say_goodbye(self):
-		self.label.configure(text = self.message)
-		self.window.after(self.delay, self.window.destroy)
+		self.label.update_()
 
-class HelloButton(ttk.Button):
-	def __init__(self, parent, label):
-		super().__init__(parent)
-		# object attributes
-		self.text = "Say Hello"
-		self.message = "Hello, World!"
-		self.label = label
-		# configure
-		self.config(text = self.text, command = self.say_hello)
-
-	def say_hello(self):
-		self.label.configure(text = self.message)
 
 if __name__ == "__main__":
 	main()

@@ -22,7 +22,7 @@ class MainFrame(ttk.Frame):
 		# populate
 		state_label = StateLabel(self)
 		hello_button = HelloButton(self, state_label)
-		activator_button = ActivatorButton(self, state_label, hello_button)
+		activator_button = ActivatorButton(self, hello_button)
 		# layout
 		state_label.grid(row = 0, column = 0, padx = 10, pady = 10, columnspan = 2)
 		hello_button.grid(row = 1, column = 0, padx = 10, pady = 10)
@@ -34,43 +34,60 @@ class StateLabel(ttk.Label):
 		# object attributes
 		self.enabled_text = "Hello Button is enabled"
 		self.disabled_text = "Hello Button is disabled"
+		self.hello_message = "Hello, World!"
 		self.changeable = StringVar()
 		self.changeable.set(self.enabled_text)
 		# configure
 		self.config(textvariable = self.changeable)
 
+	def set_disabled(self):
+		self.changeable.set(self.disabled_text)
+	
+	def set_enabled(self):
+		self.changeable.set(self.enabled_text)
+	
+	def set_hello(self):
+		self.changeable.set(self.hello_message)
+		
 class ActivatorButton(ttk.Button):
-	def __init__(self, parent, label, button):
+	def __init__(self, parent, button):
 		super().__init__(parent)
 		# object attributes
-		self.text = "Deactivate Hello Button"
-		self.message = "Hello Button is disabled"
+		self.text = StringVar()
+		self.deactivate_text = "Deactivate Hello Button"
+		self.activate_text = "Activate Hello Button"
 		# configure
-		self.config(text = self.text, command = lambda:self.toggle_button_state(label, button))
+		self.text.set(self.deactivate_text)
+		self.config(textvariable = self.text)
+		self.config(text = self.text, command = lambda:self.switch_state(button))
 	
-	####### The relevant code ########
-	def toggle_button_state(self, label, button):
-		label.configure(text = self.message)
-
-		if button.instate(['!disabled']) == True:
-			label.changeable.set(label.disabled_text)
-			button.state(['disabled'])
+	def switch_state(self, button):
+		button.toggle_button_state() # activate/deactivate the HelloButton
+		
+		if self.text.get() == self.deactivate_text: # switch ActivatorButton text
+			self.text.set(self.activate_text)
 		else:
-			button.state(['!disabled'])
-			label.changeable.set(label.enabled_text)
+			self.text.set(self.deactivate_text) 
 
 class HelloButton(ttk.Button):
 	def __init__(self, parent, label):
 		super().__init__(parent)
 		# object attributes
 		self.text = "Say Hello"
-		self.message = "Hello, World!"
 		self.label = label
 		# configure
 		self.config(text = self.text, command = self.say_hello)
 
 	def say_hello(self):
-		self.label.changeable.set(self.message)
+		self.label.set_hello()
+
+	def toggle_button_state(self):
+		if self.instate(['!disabled']) == True:
+			self.label.set_disabled()
+			self.state(['disabled'])
+		else:
+			self.state(['!disabled'])
+			self.label.set_enabled()
 
 if __name__ == "__main__":
 	main()

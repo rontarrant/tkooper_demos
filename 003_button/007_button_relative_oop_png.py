@@ -30,15 +30,15 @@ class HelloButton(ttk.Button):
 		# object attributes
 		self.text = "Say Hello"
 		self.message = "Hello, Avatar!"
-		self.image = RelativeImagePath.get_path("images/head.png")
+		self.image = RelativePath.get_image_path("images/head.png")
 		# configure
 		self.config(text = self.text, command = self.say_hello, image = self.image, compound = 'top')
 
 	def say_hello(self):
 		print(self.message)
 
-class RelativeImagePath:
-	def get_path(file_name):
+class RelativePath:
+	def get_image_path(file_name):
 		current_directory = os.path.dirname(__file__)
 		path = os.path.join(current_directory, file_name)
 		relative_file_name = PhotoImage(file = path)

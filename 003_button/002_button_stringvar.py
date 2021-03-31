@@ -35,6 +35,12 @@ class ChangableLabel(ttk.Label):
 		self.changeable.set(self.choices[0]) # set an initial value
 		# configure
 		self.config(textvariable = self.changeable)
+		
+	def update(self):
+		if self.cget("text") == self.choices[0]:
+			self.changeable.set(self.choices[1])
+		else:
+			self.changeable.set(self.choices[0])
 
 class ChangeAgentButton(ttk.Button):
 	def __init__(self, parent, label):
@@ -46,10 +52,7 @@ class ChangeAgentButton(ttk.Button):
 		self.config(text = self.text, command = self.say_hello)
 
 	def say_hello(self):
-		if self.label.cget("text") == self.label.choices[0]:
-			self.label.changeable.set(self.label.choices[1])
-		else:
-			self.label.changeable.set(self.label.choices[0])
+		self.label.update()
 
 if __name__ == "__main__":
 	main()

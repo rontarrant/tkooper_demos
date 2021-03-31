@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from relative import RelativeImagePath
+from relative import RelativePath
 
 def main():
 	window = Window()
@@ -30,7 +30,7 @@ class ImageButton(ttk.Button):
 		# object attributes
 		self.text = "Say Hello"
 		self.message = "Hello, Avatar!"
-		self.image = RelativeImagePath.get_path("images/head.png")
+		self.image = RelativePath.get_image_path("images/head.png")
 		# configure
 		self.config(text = self.text, command = self.say_hello, image = self.image, compound = 'top')
 

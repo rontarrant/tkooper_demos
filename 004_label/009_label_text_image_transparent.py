@@ -42,7 +42,7 @@ class HelloLabel(ttk.Label):
 		super().__init__(window)
 		# object attributes
 		self.text = "A Label with Text and a Transparent Image"
-		self.image = RelativeImagePath.get_path('images/head_transparent_bg.png')
+		self.image = RelativePath.get_image_path('images/head_transparent_bg.png')
 		self.width = len(self.text)
 		# configure
 		self.rowconfigure(0, weight = 1)
@@ -50,8 +50,8 @@ class HelloLabel(ttk.Label):
 		self.config(text = self.text, image = self.image, compound = 'top')
 		self.config(anchor = "center", width = self.width, background = "yellow", relief = "raised")
 
-class RelativeImagePath:
-	def get_path(file_name):
+class RelativePath:
+	def get_image_path(file_name):
 		current_directory = os.path.dirname(__file__)
 		path = os.path.join(current_directory, file_name)
 		relative_file_name = PhotoImage(file = path)

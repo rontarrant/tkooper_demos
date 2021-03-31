@@ -23,15 +23,15 @@ class MyCanvas(Canvas):
 		self.width = 400
 		self.height = 400
 		self.bg = "white"
-		self.image = RelativeImagePath.get_path("images/arrow.png")
+		self.image = RelativePath.get_image_path("images/arrow.png")
 		# configure
 		self.config(bg = self.bg, width = self.width, height = self.height)
 		self.create_rectangle(10, 10, 200, 100, fill='red', outline = "")
 		self.create_image(150, 120, image = self.image)
 		self.grid()
 
-class RelativeImagePath:
-	def get_path(file_name):
+class RelativePath:
+	def get_image_path(file_name):
 		current_directory = os.path.dirname(__file__)
 		path = os.path.join(current_directory, file_name)
 		relative_file_name = PhotoImage(file = path)
