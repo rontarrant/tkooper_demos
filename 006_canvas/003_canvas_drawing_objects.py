@@ -37,50 +37,58 @@ class MyCanvas(Canvas):
 		self.bg = "white"
 		# configure
 		super().__init__(window, bg = self.bg, width = self.width, height = self.height)
+		# populate
+		face = Face(self)
+		left_eye = LeftEye(self)
+		right_eye = RightEye(self)
+		mouth = Mouth(self)
 		# layout
 		self.grid()
-		
-		face = SmileyFace(self)
 
-class SmileyFace():
+class Face():
 	def __init__(self, canvas):
 		# object attributes
 		self.geometry = (50, 50, 350, 350)
-		self.color = "yellow"
-		# 
+		self.color = '#eccf43'
+		self.outline = ''
+		# configure
 		self.draw(canvas)
 		
 	def draw(self, canvas):
-		
-		canvas.create_oval(self.geometry, fill = self.color)
-		left_eye = LeftEye(canvas)
-		right_eye = RightEye(canvas)
-		mouth = Mouth(canvas)
+		canvas.create_oval(self.geometry, fill = self.color, outline = self.outline)
 
 class LeftEye():
 	def __init__(self, canvas):
 		self.geometry = (140, 100, 160, 130)
 		self.curve_length = 180
 		self.color = "black"
-		canvas.create_oval(self.geometry, extent = self.curve_length, fill = self.color)
+		self.draw(canvas)
+	
+	def draw(self, canvas):
+		canvas.create_oval(self.geometry, fill = self.color)
 
 class RightEye():
 	def __init__(self, canvas):
 		self.geometry = (230, 100, 250, 130)
 		self.curve_length = 180
 		self.color = "black"
-		canvas.create_oval(self.geometry, extent = self.curve_length, fill = self.color)
+		self.draw(canvas)
+		
+	def draw(self, canvas):
+		canvas.create_oval(self.geometry, fill = self.color)
 
 class Mouth():
 	def __init__(self, canvas):
-		self.create_arc((125, 150, 275, 290), width = 5, style = ARC, start = -20, extent = -140)
+		self.geometry = (125, 150, 275, 290)
 		self.width = 5
+		self.style = ARC
+		self.start = -20
+		self.extent = -140
 		self.draw(canvas)
 	
 	def draw(self, canvas):
-		canvas.create_line(self.line_1, fill = self.color, width = self.width)
-		canvas.create_line(self.line_2, fill = self.color, width = self.width)
-		canvas.create_line(self.line_3, fill = self.color, width = self.width)
+		canvas.create_arc(self.geometry, width = 5, style = ARC, start = -20, extent = -140)
+		self.width = 5
 
 
 if __name__ == "__main__":

@@ -36,6 +36,9 @@ class StateLabel(ttk.Label):
 		self.changeable.set(self.off_text)
 		# configure
 		self.config(textvariable = self.changeable)
+		
+	def switch_text(self, new_text):
+		self.changeable.set(self.on_text + "\n" + new_text)
 
 class FeatureCheckbutton(ttk.Checkbutton):
 	def __init__(self, parent, label):
@@ -46,13 +49,14 @@ class FeatureCheckbutton(ttk.Checkbutton):
 		self.on = "FeatureCheckButton is ON"
 		self.off = "FeatureCheckButton is OFF"
 		# config
-		self.config(text = self.text, onvalue = self.on, offvalue = self.off, variable = self.var, command = lambda:self.report(label))
+		self.config(text = self.text, onvalue = self.on, offvalue = self.off, variable = self.var, command = lambda:self.update_(label))
+		self.update_(label) # force a consistent look for the label
 		
-	def report(self, label):
+	def update_(self, label):
 		if self.var.get() == self.on:
-			label.changeable.set(label.on_text + "\n" + self.var.get())
+			label.switch_text(self.on)
 		else:
-			label.changeable.set(label.off_text + "\n" + self.var.get())
+			label.switch_text(self.off)
 
 
 if __name__ == "__main__":

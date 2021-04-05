@@ -33,7 +33,7 @@ class SimpleLabel(ttk.Label):
 	def __init__(self, parent):
 		super().__init__(parent)
 		# object attributes
-		self.original_text = "Simple Label"
+		self.original_text = "Three little labels,\nall in a row."
 		# configure
 		self.config(text = self.original_text)
 

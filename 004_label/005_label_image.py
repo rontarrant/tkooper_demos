@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from relative import RelativePath
 
 def main():
 	window = Window()
@@ -39,7 +40,7 @@ class HelloLabel(ttk.Label):
 		super().__init__(window)
 		# object attributes
 		self.text = "A Label with an Image"
-		self.image = PhotoImage(file = './images/head.png')
+		self.image = RelativePath.get_image_path('./images/head.png')
 		# configure
 		self.grid(column = 0, row = 0)
 		self.rowconfigure(0, weight = 1)

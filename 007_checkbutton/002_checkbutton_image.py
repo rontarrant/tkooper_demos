@@ -37,6 +37,12 @@ class StateLabel(ttk.Label):
 		self.changeable.set(self.off_text)
 		# configure
 		self.config(textvariable = self.changeable)
+		
+	def change_state(self, state):
+		if state == 1:
+			self.changeable.set(self.on_text)
+		else:
+			self.changeable.set(self.off_text)
 
 class FeatureCheckbutton(ttk.Checkbutton):
 	def __init__(self, parent, label):
@@ -47,13 +53,10 @@ class FeatureCheckbutton(ttk.Checkbutton):
 		self.image = RelativePath.get_image_path("images/head20x20.png")
 		# config
 		self.config(text = self.text, onvalue = 1, offvalue = 0, variable = self.var)
-		self.config(image = self.image, compound = "right", command = lambda:self.report(label))
+		self.config(image = self.image, compound = "right", command = lambda:self.update_(label))
 
-	def report(self, label):
-		if self.var.get() == 1:
-			label.changeable.set(label.on_text)
-		else:
-			label.changeable.set(label.off_text)
+	def update_(self, label):
+		label.change_state(self.var.get())
 
 
 if __name__ == "__main__":

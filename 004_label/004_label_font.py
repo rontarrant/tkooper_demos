@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+import tkinter.font as font
 
 def main():
 	window = Window()
@@ -9,7 +10,7 @@ class Window(Tk):
 	def __init__(self):
 		super().__init__()
 		# object attributes
-		self.title("Label Configuration")
+		self.title("Label Font")
 		self.width = 290
 		self.height = 100
 		# configure
@@ -33,17 +34,11 @@ class HelloLabel(ttk.Label):
 	def __init__(self, window):
 		super().__init__(window)
 		# object attributes
-		self.text = "Configuration with Style"
+		self.text = "Changed the font to Times New Roman"
 		self.width = len(self.text) # width is in characters
+		label_font = font.Font(family = "Times New Roman", size = 12, weight = "normal")
 		# configure
-		self.config(anchor = "c", text = self.text, width = self.width)
-		self.print_config_list()
-		
-	def print_config_list(self):
-		config_dict = self.config()
-		
-		for key, value_set in config_dict.items():
-			print(f"{key} : {value_set}")
+		self.config(anchor = "c", text = self.text, width = self.width, font = label_font)
 
 
 if __name__ == "__main__":

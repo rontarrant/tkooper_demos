@@ -39,6 +39,12 @@ class StateLabel(ttk.Label):
 		self.changeable.set(self.off_text)
 		# configure
 		self.config(textvariable = self.changeable)
+	
+	def change_state(self, state):
+		if state == 1:
+			self.changeable.set(self.on_text)
+		else:
+			self.changeable.set(self.off_text)
 
 class FeatureCheckbutton(ttk.Checkbutton):
 	def __init__(self, parent, label):
@@ -48,35 +54,38 @@ class FeatureCheckbutton(ttk.Checkbutton):
 		self.var = IntVar()
 		self.on = 1
 		self.off = 0
+		self.off_string = "Checkbutton is DISabled."
+		self.on_string = "Checkbutton is ENabled."
+
 		# config
 		self.config(text = self.text, onvalue = self.on, offvalue = self.off, variable = self.var)
-		self.config(command = lambda:self.report(label))
+		self.config(command = lambda:self.update_(label))
 		
-	def report(self, label):
-		if self.var.get() == 1:
-			label.changeable.set(label.on_text)
+	def update_(self, label):
+		label.change_state(self.var.get())
+		
+	def state_(self):
+		if self.instate(['disabled']):
+			print(self.on_string)
+			self.state(['!disabled'])
+			#self.config(state = NORMAL)
 		else:
-			label.changeable.set(label.off_text)
-
+			print(self.off_string)
+			self.state(['disabled'])
+			#self.config(state = DISABLED)
+		
+		print(self.state())
 
 class MasterButton(ttk.Button):
 	def __init__(self, frame, checkbutton):
 		super().__init__(frame)
 		# object attributes
 		self.text = "Disable Checkbutton"
-		self.cb_off = "Checkbutton is DISabled."
-		self.cb_on = "Checkbutton is ENabled."
-		self.controlled_button = checkbutton
 		# configure
-		self.config(text = self.text, command = self.disable_checkbutton)
+		self.config(text = self.text, command = lambda:self.checkbutton_on_off(checkbutton))
 
-	def disable_checkbutton(self):
-		if self.controlled_button.state(['disabled']):
-			self.controlled_button.config(state = DISABLED)
-			print(self.cb_off)
-		else:
-			self.controlled_button.config(state = NORMAL)
-			print(self.cb_on)
+	def checkbutton_on_off(self, checkbutton):
+		checkbutton.state_()
 
 
 if __name__ == "__main__":

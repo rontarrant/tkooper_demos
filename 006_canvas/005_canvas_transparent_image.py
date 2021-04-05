@@ -23,12 +23,60 @@ class MyCanvas(Canvas):
 		self.width = 400
 		self.height = 400
 		self.bg = "white"
-		self.image = RelativePath.get_image_path("images/arrow.png")
+		self.images: dict = {} # A bug makes it necessary to keep an independent reference to any images placed on a canvas.
 		# configure
 		self.config(bg = self.bg, width = self.width, height = self.height)
-		self.create_rectangle(10, 10, 200, 100, fill='red', outline = "")
-		self.create_image(150, 120, image = self.image)
+		# populate
+		rectangle_red = RectangleRed(self)
+		arrow_image = ArrowImage(self)
+		rectangle_blue = RectangleBlue(self)
+		arrow_image = FaceImage(self)
+		# layout
 		self.grid()
+
+class FaceImage():
+	def __init__(self, canvas):
+		# object attributes
+		self.x = 88
+		self.y = 173
+		canvas.images['head'] = RelativePath.get_image_path("images/head.png") # extra reference workaround
+		self.anchor = 'nw'
+		# configure
+		canvas.create_image(self.x, self.y, image = canvas.images['head'], anchor = self.anchor)
+
+class ArrowImage():
+	def __init__(self, canvas):
+		# object attributes
+		self.x = 118
+		self.y = 79
+		canvas.images['arrow'] = RelativePath.get_image_path("images/arrow.png")
+		self.anchor = 'nw'
+		# configure
+		canvas.create_image(self.x, self.y, image = canvas.images['arrow'], anchor = self.anchor)
+
+class RectangleBlue():
+	def __init__(self, canvas):
+		# object attributes
+		self.start_x = 12
+		self.start_y = 174
+		self.end_x = 381
+		self.end_y = 391
+		self.fill_color = 'blue'
+		self.outline_color = ''
+		# configure
+		canvas.create_rectangle(self.start_x, self.start_y, self.end_x, self.end_y, fill = self.fill_color, outline = self.outline_color)
+
+class RectangleRed():
+	def __init__(self, canvas):
+		# object attributes
+		self.start_x = 10
+		self.start_y = 10
+		self.end_x = 200
+		self.end_y = 100
+		self.fill_color = 'red'
+		self.outline_color = ''
+		# configure
+		canvas.create_rectangle(self.start_x, self.start_y, self.end_x, self.end_y, fill = self.fill_color, outline = self.outline_color)
 
 class RelativePath:
 	def get_image_path(file_name):

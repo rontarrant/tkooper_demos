@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-import os
+from relative import RelativePath
 
 def main():
 	window = Window()
@@ -36,7 +36,6 @@ class MainFrame(ttk.Frame):
 		label.grid(column = 0, row = 0)
 		# centering
 
-
 class HelloLabel(ttk.Label):
 	def __init__(self, window):
 		super().__init__(window)
@@ -49,14 +48,6 @@ class HelloLabel(ttk.Label):
 		self.columnconfigure(0, weight = 1)
 		self.config(text = self.text, image = self.image, compound = 'top')
 		self.config(anchor = "center", width = self.width, background = "yellow", relief = "raised")
-
-class RelativePath:
-	def get_image_path(file_name):
-		current_directory = os.path.dirname(__file__)
-		path = os.path.join(current_directory, file_name)
-		relative_file_name = PhotoImage(file = path)
-
-		return relative_file_name
 
 
 if __name__ == "__main__":
