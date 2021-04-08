@@ -1,3 +1,4 @@
+# a more portable version of an Entry with a Label
 from tkinter import *
 from tkinter import ttk
 
@@ -9,11 +10,11 @@ class Window(Tk):
 	def __init__(self):
 		super().__init__()
 		# object attributes
-		self.title_text = "Simple Entry"
+		self.title_text = "Labeled Entry"
 		# configure
 		self.title(self.title_text)
-		self.config(width = 270, height = 50)
-		self.grid_propagate(False) # otherwise, window has no size at all
+		self.grid_propagate(False)
+		self.config(width = 260, height = 50)
 		#populate
 		mainframe = MainFrame(self)
 
@@ -24,9 +25,21 @@ class MainFrame(ttk.Frame):
 		# configure
 		self.grid()
 		# populate
-		string_entry = StringEntry(self)
+		labeled_entry = LabeledEntry(self)
 		# layout
-		string_entry.grid(padx = 10, pady = 10)
+		labeled_entry.grid()
+		
+class LabeledEntry(ttk.Frame):
+	def __init__(self, parent):
+		super().__init__(parent)
+		# object attributes
+		# configure
+		# populate
+		string_entry = StringEntry(self)
+		label = SimpleLabel(self)
+		# layout
+		label.grid(column = 0, row = 0, padx = 10, pady = 10)
+		string_entry.grid(column = 1, row = 0, padx = 10, pady = 10)
 
 class StringEntry(ttk.Entry):
 	def __init__(self, parent):
@@ -40,6 +53,15 @@ class StringEntry(ttk.Entry):
 	def report(self, event): # two ways to fetch the Entry contents
 		print(self.get())
 		print(self.string.get())
+
+class SimpleLabel(ttk.Label):
+	def __init__(self, window):
+		super().__init__(window)
+		# object attributes
+		self.text = "Text Entry"
+		# configure
+		self.config(text = self.text)
+
 
 if __name__ == "__main__":
 	main()
