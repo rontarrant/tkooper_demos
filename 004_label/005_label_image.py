@@ -31,11 +31,11 @@ class MainFrame(ttk.Frame):
 		# configure
 		self.grid()
 		# populate
-		hello_label = HelloLabel(self)
+		hello_label = ImageLabel(self)
 		# layout
 		hello_label.grid(column = 0, row = 0)
 
-class HelloLabel(ttk.Label):
+class ImageLabel(ttk.Label):
 	def __init__(self, window):
 		super().__init__(window)
 		# object attributes

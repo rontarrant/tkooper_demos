@@ -17,6 +17,7 @@ class Window(Tk):
 		# configure
 		self.title(self.title_text)
 		self.config(width = 260, height = 100)
+		self.grid_propagate(False)
 		#populate
 		postal_code_label = EntryLabel(self, "Postal Code:")
 		postal_code_entry = NumericEntry(self)
@@ -25,8 +26,8 @@ class Window(Tk):
 		# layout
 		postal_code_label.grid(row = 0, column = 0)
 		postal_code_entry.grid(row = 0, column = 1)
-		city_label.grid(row = 1, column = 0)
-		city_entry.grid(row = 1, column = 1)
+		city_label.grid(row = 1, column = 0, sticky = 'e')
+		city_entry.grid(row = 1, column = 1, sticky = 'e')
 
 class EntryLabel(ttk.Label):
 	def __init__(self, parent, label_text):
@@ -36,6 +37,9 @@ class EntryLabel(ttk.Label):
 class CityEntry(ttk.Entry):
 	def __init__(self, parent):
 		super().__init__(parent)
+		# configure
+		self.grid_configure(padx = 10, pady = 10)
+
 		
 class NumericEntry(ttk.Entry):
 	def __init__(self, parent):
@@ -46,6 +50,7 @@ class NumericEntry(ttk.Entry):
 		self.reg = (self.winfo_toplevel().register(self.validate_input), '%S', '%s', '%V')
 		self.inreg = (self.winfo_toplevel().register(self.invalid_input), '%s', '%V')
 		# configure
+		self.grid_configure(padx = 10, pady = 10)
 		self.config(textvariable = self.var, validate = "all", validatecommand = self.reg, invalidcommand = self.inreg)
 
 	def validate_input(self, new_value, entry_content, validation_type):

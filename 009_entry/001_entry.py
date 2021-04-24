@@ -35,7 +35,7 @@ class StringEntry(ttk.Entry):
 		self.string = StringVar()
 		# configure
 		self.config(textvariable = self.string)
-		self.bind('<Tab>', self.report)
+		self.bind('<Tab>', self.report) # binding a key
 		
 	def report(self, event): # two ways to fetch the Entry contents
 		print(self.get())

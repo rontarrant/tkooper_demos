@@ -22,9 +22,9 @@ class Window(Tk):
 		location_label = EntryLabel(self, "Location:")
 		location_entry = StringEntry(self)
 		# layout
-		name_label.grid(row = 0, column = 0)
+		name_label.grid(row = 0, column = 0, sticky = 'e')
 		name_entry.grid(row = 0, column = 1)
-		location_label.grid(row = 1, column = 0)
+		location_label.grid(row = 1, column = 0, sticky = 'e')
 		location_entry.grid(row = 1, column = 1)
 
 class StringEntry(ttk.Entry):
@@ -35,21 +35,32 @@ class StringEntry(ttk.Entry):
 		self.reg = (self.winfo_toplevel().register(self.validate_input))
 		# configure
 		self.grid_configure(padx = 10, pady = 10)
-		self.config(textvariable = self.var, validate = "all", validatecommand = (self.reg, "%S", "%P", '%V'))
+		self.config(textvariable = self.var, validate = "all", validatecommand = (self.reg, "%S", "%P", '%V', '%d'))
 		self.focus()
-
-	def validate_input(self, new_value, entry_content, validation_type):
+		
+	def validate_input(self, new_value, entry_content, validation_type, action_code):
+		'''
+		Validates input, taking into account such things as initials (N.J. Bates), credentials (M.B.A.), 
+		hyphenated names (Billy-Bob Thornclamp), or names given in first, last order (Bates, Norman).
+		If the name(s) aren't capitalized, and the name given isn't 'k.d. lang,' title case is applied.
+		'''
 		valid = True
 		
+		if action_code != 1:
+			valid = True
+		
 		if validation_type == "key":
-			valid_characters = (" ", ".", ",") # '.' for initials or creditials; ',' for last, first order or creditials
+			valid_characters = (" ", ".", ",", "-") # '.' for initials or creditials; ',' for last, first order or creditials
 			valid = (new_value.isalpha() or new_value in valid_characters)
 		elif validation_type == "focusout":
 			valid = True
 			
 			if entry_content != "k.d. lang":
-				print(entry_content)
 				self.var.set(entry_content.title())
+			else:
+				self.var.set(entry_content)
+
+			print(self.var.get())
 
 		return valid
 
