@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter import ttk
-import ast
 
 def main():
 	window = Window()
