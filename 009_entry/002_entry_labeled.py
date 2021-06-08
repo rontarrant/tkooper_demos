@@ -51,8 +51,8 @@ class StringEntry(ttk.Entry):
 		self.bind('<Tab>', self.report)
 		
 	def report(self, event): # two ways to fetch the Entry contents
-		print(self.get())
-		print(self.string.get())
+		print(self.get()) # directly from the Entry
+		print(self.string.get()) # from the Entry's variable
 
 class SimpleLabel(ttk.Label):
 	def __init__(self, window):
