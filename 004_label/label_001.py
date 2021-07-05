@@ -29,8 +29,8 @@ class MainFrame(ttk.Frame):
 		simple_label.grid()
 
 class SimpleLabel(ttk.Label):
-	def __init__(self, window):
-		super().__init__(window)
+	def __init__(self, parent):
+		super().__init__(parent)
 		# object attributes
 		self.text = "Definitely a Simple Label"
 		# configure

@@ -8,6 +8,7 @@ def main():
 class Window(Tk):
 	def __init__(self):
 		super().__init__()
+		# object attributes
 		# configure
 		self.title("Hello, Button!")
 		#populate

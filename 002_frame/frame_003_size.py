@@ -9,9 +9,9 @@ class Window(Tk):
 	def __init__(self):
 		super().__init__()
 		# object attributes
-		self.size = "200x300"
+		self.title_text = "Frame Sized"
 		# configure
-		self.geometry(self.size)
+		self.title(self.title_text)
 		#populate
 		mainframe = MainFrame(self)
 
@@ -19,8 +19,8 @@ class MainFrame(ttk.Frame):
 	def __init__(self, window):
 		super().__init__(window)
 		# object attributes
-		self.width = 450
-		self.height = 300
+		self.width = 250
+		self.height = 100
 		# configure
 		self.config(width = self.width, height = self.height)
 		self.grid()

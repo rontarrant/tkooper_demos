@@ -1,13 +1,3 @@
-'''
-The GTK philosophy is to allow the window manager to handle placement and sizing
-of all windows as they're opened. However, not all window managers are capable
-of such things. This is one of my pet peeves. I use a multi-monitor desktop
-configuration and having to take the extra time and effort to place and size
-a window after opening it is just annoying. I want it dealt with for me and
-since we have these devices (computers) that can do all that for us, why not?
-
-That's where this demo comes in. 
-'''
 from tkinter import *
 from tkinter import ttk
 
@@ -19,6 +9,7 @@ class Window(Tk):
 	def __init__(self):
 		super().__init__()
 		# object attributes
+		self.size_position = "400x250+-200+300"
 		self.width: int = 400
 		self.height: int = 250
 		self.x_pos: int = -200
@@ -29,7 +20,6 @@ class Window(Tk):
 		self.set_geometry_string(self.width, self.height, self.x_pos, self.y_pos)
 		self.geometry(self.size_position.get())
 		self.title(self.title_text)
-		self.grid_propagate(False)
 		#populate
 		mainframe = MainFrame(self)
 		

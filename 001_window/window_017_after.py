@@ -1,3 +1,12 @@
+'''
+after() sets an amount of time to wait before calling the designated method/function.
+Unlike sleep(), it doesn't lock up the application while waiting for the designated
+time to pass.
+
+If called recursively - the calling method/function containing after() is, itself,
+called by after() - each time through the recursion, after() simply waits again
+before re-calling the method/function. There's no delay in handling idle tasks.
+'''
 from tkinter import *
 
 def main():
