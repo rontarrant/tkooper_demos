@@ -21,8 +21,6 @@ class MainFrame(ttk.Frame):
 		self.grid(column = 0, row = 0, sticky = (N, W, E, S))
 		# populate
 		hello_button = HelloButton(self)
-		# layout
-		hello_button.grid(row = 0, column = 0, sticky = 'e', padx = 2, pady = 2)
 
 class HelloButton(ttk.Button):
 	def __init__(self, frame):
@@ -35,6 +33,7 @@ class HelloButton(ttk.Button):
 		self.image = PhotoImage(file = self.image_path)
 		# configure
 		self.config(text = self.text, command = self.say_hello, image = self.image, compound = 'top')
+		self.grid(row = 0, column = 0, sticky = 'e', padx = 2, pady = 2)
 
 	def say_hello(self):
 		print(self.message)

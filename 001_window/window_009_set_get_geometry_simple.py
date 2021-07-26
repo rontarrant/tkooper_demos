@@ -32,8 +32,6 @@ class MainFrame(ttk.Frame):
 		self.grid()
 		# populate
 		hello_button = HelloButton(self)
-		# layout
-		hello_button.grid()
 
 class HelloButton(ttk.Button):
 	def __init__(self, frame):
@@ -43,6 +41,7 @@ class HelloButton(ttk.Button):
 		self.window = self.winfo_toplevel()
 		# configure
 		self.config(text = self.text, command = self.window.get_geometry)
+		self.grid()
 
 
 if __name__ == "__main__":

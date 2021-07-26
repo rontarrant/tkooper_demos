@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 
 def main():
 	window = Window()
@@ -18,6 +19,8 @@ class Window(Tk):
 		self.size = self.set_size_position()
 		self.geometry(self.size)
 		self.title(self.title_text)
+		# populate
+		mainframe = MainFrame(self)
 		
 	def set_size_position(self):
 		'''
@@ -44,6 +47,27 @@ class Window(Tk):
 		size_position = str(self.width) + "x" + str(self.height) + x_offset + str(self.x_pos) + y_offset + str(self.y_pos)
 		
 		return size_position
+
+class MainFrame(ttk.Frame):
+	def __init__(self, window):
+		super().__init__(window)
+		# configure
+		self.grid()
+		# populate
+		size_button = SizeButton(self)
+
+class SizeButton(Button):
+	def __init__(self, parent):
+		super().__init__(parent)
+		# object attributes
+		self.text = "Print Size"
+		# configure
+		self.config(text = self.text, command = self.print_size)
+		self.grid()
 		
+	def print_size(self):
+		print(f"width, height, x, y: {self.winfo_toplevel().winfo_geometry()}")
+
+
 if __name__ == "__main__":
 	main()

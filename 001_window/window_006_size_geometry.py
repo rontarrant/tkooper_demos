@@ -9,12 +9,10 @@ class Window(Tk):
 	def __init__(self):
 		super().__init__()
 		# object attributes
-		self.title("A Simple Label")
-		self.width = 260
-		self.height = 100
+		self.width: int = 330
+		self.height: int = 200
 		# configure
-		self.config(width = self.width, height = self.height)
-		self.grid_propagate(False)
+		self.geometry(str(self.width) + "x" + str(self.height))
 		# populate
 		mainframe = MainFrame(self)
 
@@ -24,18 +22,20 @@ class MainFrame(ttk.Frame):
 		# configure
 		self.grid()
 		# populate
-		simple_label = SimpleLabel(self)
-		# layout
-		simple_label.grid()
+		size_button = SizeButton(self)
 
-class SimpleLabel(ttk.Label):
+class SizeButton(Button):
 	def __init__(self, parent):
 		super().__init__(parent)
 		# object attributes
-		self.text = "Definitely a Simple Label"
+		self.text = "Print Size"
 		# configure
-		self.config(text = self.text)
-
+		self.config(text = self.text, command = self.print_size)
+		self.grid()
+		
+	def print_size(self):
+		print(f"width: {self.winfo_toplevel().winfo_width()}")
+		print(f"height: {self.winfo_toplevel().winfo_height()}")
 
 if __name__ == "__main__":
 	main()

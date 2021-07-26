@@ -8,7 +8,7 @@ def main():
 class MainFrame(ttk.Frame):
 	def __init__(self, master = None):
 		super().__init__(master)
-		self.grid()
+		print(self.winfo_toplevel().winfo_children())
 
 		
 if __name__ == "__main__":

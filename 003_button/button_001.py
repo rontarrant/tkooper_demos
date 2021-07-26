@@ -9,12 +9,7 @@ class Window(Tk):
 	def __init__(self):
 		super().__init__()
 		# object attributes
-		self.width = 310
-		self.height = 100
 		# configure
-		self.title("Basic Button with Callback")
-		self.config(width = self.width, height = self.height)
-		self.grid_propagate(False)
 		#populate
 		mainframe = MainFrame(self)
 
@@ -25,8 +20,6 @@ class MainFrame(ttk.Frame):
 		self.grid()
 		# populate
 		hello_button = HelloButton(self)
-		# layout
-		hello_button.grid()
 
 class HelloButton(ttk.Button):
 	def __init__(self, frame):
@@ -35,6 +28,7 @@ class HelloButton(ttk.Button):
 		self.text = "Say Hello"
 		self.message = "Hello, tkinter World!"
 		# configure
+		self.grid()
 		self.config(text = self.text, command = self.say_hello)
 
 	def say_hello(self):

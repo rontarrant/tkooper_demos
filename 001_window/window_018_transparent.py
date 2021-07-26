@@ -24,8 +24,6 @@ class MainFrame(ttk.Frame):
 		self.grid(column = 0, row = 0, sticky = (N, W, E, S))
 		# populate
 		message_label = MessageLabel(self)
-		# layout
-		message_label.grid(column = 0, row = 0)
 
 class MessageLabel(ttk.Label):
 	def __init__(self, window):
@@ -36,6 +34,7 @@ class MessageLabel(ttk.Label):
 		self.photo = RelativePath.get_image_path("images/example.png")
 		# configure
 		self.config(text = self.text, image = self.photo, compound = 'bottom', width = self.width)
+		self.grid(column = 0, row = 0)
 
 
 if __name__ == "__main__":
