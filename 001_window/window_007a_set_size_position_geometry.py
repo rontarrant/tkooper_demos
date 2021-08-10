@@ -23,18 +23,22 @@ class Window(Tk):
 		y_offset: str
 		size_position: str
 
-		if self.x_pos > 0:
-			x_offset = "+"
-		else:
-			x_offset = ""
-		
-		if self.y_pos > 0:
-			y_offset = "+"
-		else:
-			y_offset = ""
-		
+		x_offset = self.sign(self.x_pos)
+		y_offset = self.sign(self.y_pos)
 		size_position = str(self.width) + "x" + str(self.height) + x_offset + str(self.x_pos) + y_offset + str(self.y_pos)
 		self.geometry(size_position)
+		self.update_idletasks()
+		print(f"{self.geometry()}")
+
+	def sign(self, value):
+		offset_str: str
+		
+		if value < 0:
+			offset_str = ""
+		else:
+			offset_str = "+"
+		
+		return offset_str
 
 class MainFrame(Frame):
 	def __init__(self, window):
@@ -50,17 +54,9 @@ class SizeButton(Button):
 		# object attributes
 		self.text = "Set Size and Position"
 		# configure
-		self.config(text = self.text, command = self.print_size)
+		self.config(text = self.text, command = self.winfo_toplevel().set_size_position)
 		self.grid()
 		
-	def print_size(self):
-		self.winfo_toplevel().set_size_position()
-
-		print(f"Before refresh: width, height, x, y: {self.winfo_toplevel().winfo_geometry()}")
-		self.winfo_toplevel().update_idletasks()
-		print(f"After refresh: width, height, x, y: {self.winfo_toplevel().winfo_geometry()}\n")
-
-
 
 if __name__ == "__main__":
 	main()

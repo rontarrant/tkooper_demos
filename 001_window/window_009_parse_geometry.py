@@ -36,7 +36,7 @@ class Window(Tk):
 		size_position = str(self.width) + "x" + str(self.height) + x_offset + str(self.x_pos) + y_offset + str(self.y_pos)
 		self.geometry(size_position)
 
-class MainFrame(Frame):
+class MainFrame(ttk.Frame):
 	def __init__(self, window):
 		super().__init__(window)
 		# configure
@@ -56,10 +56,7 @@ class SizeButton(Button):
 	def print_size(self):
 		self.winfo_toplevel().set_size_position()
 
-		print(f"Before refresh: width, height, x, y: {self.winfo_toplevel().winfo_geometry()}")
-		self.winfo_toplevel().update_idletasks()
-		print(f"After refresh: width, height, x, y: {self.winfo_toplevel().winfo_geometry()}\n")
-
+		print(f"width, height, x, y: {self.winfo_toplevel().winfo_geometry()}")
 
 
 if __name__ == "__main__":
