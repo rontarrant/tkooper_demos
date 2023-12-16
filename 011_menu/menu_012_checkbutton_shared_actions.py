@@ -1,6 +1,6 @@
 '''
 Assigning keyboard shortcuts to menu checkbuttons adds a dimension
-of trickiness to actions that won't exists when dealing with standard
+of trickiness to actions that won't exist when dealing with standard
 menu buttons. When toggled by selecting the menu checkbutton itself,
 the checkbutton's value toggles automatically. But when a keyboard 
 shortcut is used, the toggle must be handled in the code.

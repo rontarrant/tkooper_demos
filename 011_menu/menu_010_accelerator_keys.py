@@ -1,6 +1,6 @@
 '''
 Assigning keyboard shortcuts to menu checkbuttons adds a dimension
-of trickiness to actions that won't exists in standard menu buttons.
+of trickiness to actions that won't exist in standard menu buttons.
 When toggled by selecting the menu checkbutton, the checkbutton's
 value toggles automatically. But when a keyboard shortcut is used,
 the toggle must be handled in the code. The easiest way to do this
@@ -48,7 +48,22 @@ class EditMenu(Menu):
 		self.add_command(label = "Paste", command = self.paste_stuff, accelerator = "(Ctrl-P)")
 
 	def copy_stuff(self, event = None):
-		print("Copying stuff.")
+		print("Copying stuff...", event)
+		self.pretty_print_event(event)
+		
+	def pretty_print_event(self, event):
+		print("widget:", event.widget)
+		print("state: ", event.state)
+		print("char: ", event.char)
+		print("num: ", event.num)
+		print("keysym: ", event.keysym)
+		print("keycode: ", event.keycode)
+		print("x: ", event.x)
+		print("y: ", event.y)
+		print("width: ", event.width)
+		print("height: ", event.height)
+		print("send event: ", event.send_event)
+		print("state: ", event.state)
 
 	def cut_stuff(self, event = None):
 		print("Cutting stuff.")

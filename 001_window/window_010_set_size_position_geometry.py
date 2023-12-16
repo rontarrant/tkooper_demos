@@ -33,7 +33,8 @@ class Window(Tk):
 		else:
 			y_offset = ""
 		
-		size_position = str(self.width) + "x" + str(self.height) + x_offset + str(self.x_pos) + y_offset + str(self.y_pos)
+		size_position = f"{self.width}x{self.height}{x_offset}{self.x_pos}{y_offset}{self.y_pos}"
+		
 		self.geometry(size_position)
 
 class MainFrame(Frame):

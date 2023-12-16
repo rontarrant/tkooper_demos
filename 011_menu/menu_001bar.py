@@ -16,7 +16,8 @@ class Window(Tk):
 		# overrides
 		self.option_add('*tearOff', FALSE) # override tear-off menus
 		# object attributes
-		windowing_system = self.tk.call('tk', 'windowingsystem') # ID the windowing system (for OS-specific menu layouts)
+		# ID the windowing system (for OS-specific menu layouts)
+		windowing_system = self.tk.call('tk', 'windowingsystem')
 		self.menubar = Menubar(self)
 		# configure
 		self.config(menu = self.menubar)

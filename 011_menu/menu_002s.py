@@ -12,6 +12,9 @@
 # using:
 # 4) add_cascade().
 
+# Note: When setting the *tearOff option, don't forget the leading asterisk '*'
+# and make sure the 'O' is uppercase.
+
 from tkinter import *
 from tkinter import ttk
 
@@ -20,10 +23,13 @@ def main():
 	window.mainloop()
 
 class Window(Tk):
+	windowing_system = None # win32, x11 (Linux, BSD, Mac, etc.), aqua (Mac)
+	
 	def __init__(self):
 		super().__init__()
 		# object attributes
-		windowing_system = self.tk.call('tk', 'windowingsystem') # ID the windowing system
+		self.windowing_system = self.tk.call('tk', 'windowingsystem')
+		print("windowing_system: ", self.windowing_system)
 		self.option_add('*tearOff', FALSE) # must be set BEFORE any menus are created
 		self.menubar = Menubar(self)
 		# configure
@@ -40,10 +46,11 @@ class Menubar(Menu):
 		self.add_cascade(menu = edit_menu, label = edit_menu.label_text)
 
 class FileMenu(Menu):
+	# object attributes
+	label_text = "File"
+	
 	def __init__(self, menubar):
 		super().__init__(menubar)
-		# object attributes
-		self.label_text = "File"
 		# configure
 		self.add_command(label = "New", command = self.file_new)
 
@@ -51,10 +58,11 @@ class FileMenu(Menu):
 		print("Creating a new file...")
 		
 class EditMenu(Menu):
+	# object attributes
+	label_text = "Edit"
+	
 	def __init__(self, menubar):
 		super().__init__(menubar)
-		# object attributes
-		self.label_text = "Edit"
 		# configure
 		self.add_command(label = "Copy", command = self.copy)
 	

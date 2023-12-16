@@ -24,40 +24,69 @@ class Menubar(Menu):
 		file_menu = FileMenu(self)
 		edit_menu = EditMenu(self)
 		# attach menus
-		self.add_cascade(menu = file_menu, label = file_menu.label_text)
-		self.add_cascade(menu = edit_menu, label = edit_menu.label_text)
+		self.add_cascade(menu = file_menu, label = file_menu.text)
+		self.add_cascade(menu = edit_menu, label = edit_menu.text)
+		print("Edit menu index: ", self.index("Edit"))
 
 class FileMenu(Menu):
+	text = "File"
+	
 	def __init__(self, menubar):
 		super().__init__(menubar)
-		# object attributes
-		self.label_text = "File"
-		# menu items
-		new_menu_item = NewMenuItem(self)
-		# populate
-		self.add_command(label = new_menu_item.label_text, command = new_menu_item.command)
-
-class NewMenuItem():
-	def __init__(self, parent_menu):
-		self.label_text = "New"
-		self.command = self.new_file
+		## make items() an alias for self.index()
+		## 
+		items = self.index
 		
-	def new_file(self):
+		# New menu item
+		new_item = NewItem(self)
+		self.add_command(label = new_item.text)
+		self.entryconfig(items(new_item.text), command = new_item.command)
+		# Open menu item
+		open_item = OpenItem(self)
+		self.add_command(label = open_item.text)
+		self.entryconfig(items(open_item.text), command = open_item.command)
+		# Save menu item
+		save_item = SaveItem(self)
+		self.add_command(label = save_item.text)
+		self.entryconfig(items(save_item.text), command = save_item.command)
+
+class NewItem():
+	def __init__(self, parent_menu):
+		self.text = "New"
+		self.command = self.do_action
+		
+	def do_action(self):
 		print("Creating a new file...")
+
+class OpenItem():
+	def __init__(self, parent_menu):
+		self.text = "Open"
+		self.command = self.do_action
+		
+	def do_action(self):
+		print("Opening a new file...")
+
+class SaveItem():
+	def __init__(self, parent_menu):
+		self.text = "Save"
+		self.command = self.do_action
+		
+	def do_action(self):
+		print("Saving a file...")
 
 class EditMenu(Menu):
 	def __init__(self, menubar):
 		super().__init__(menubar)
 		# object attributes
-		self.label_text = "Edit"
+		self.text = "Edit"
 		# menu items
 		copy_menu_item = CopyMenuItem(self)
 		# populate
-		self.add_command(label = copy_menu_item.label_text, command = copy_menu_item.command)
+		self.add_command(label = copy_menu_item.text, command = copy_menu_item.command)
 
 class CopyMenuItem():
 	def __init__(self, parent_menu):
-		self.label_text = "Copy"
+		self.text = "Copy"
 		self.command = self.copy
 		
 	def copy(self):

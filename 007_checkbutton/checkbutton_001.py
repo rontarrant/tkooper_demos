@@ -50,7 +50,11 @@ class FeatureCheckbutton(ttk.Checkbutton):
 		self.text = "Feature"
 		self.var = IntVar()
 		# config
-		self.config(text = self.text, onvalue = 1, offvalue = 0, variable = self.var, command = lambda:self.update(label))
+		self.config(text = self.text)
+		self.config(onvalue = 1)
+		self.config(offvalue = 0)
+		self.config(variable = self.var)
+		self.config(command = lambda:self.update(label))
 		
 	def update(self, label):
 		label.change_state(self.var.get())

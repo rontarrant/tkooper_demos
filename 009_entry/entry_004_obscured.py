@@ -47,7 +47,7 @@ class StringEntry(ttk.Entry):
 		# object attributes
 		self.string = StringVar()
 		# configure
-		self.config(textvariable = self.string, show = "*") This is all it takes
+		self.config(textvariable = self.string, show = "*") # This is all it takes
 		self.bind('<Tab>', self.report)
 		
 	def report(self, event): # two ways to fetch the Entry contents

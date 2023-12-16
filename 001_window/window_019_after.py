@@ -6,6 +6,8 @@ time to pass.
 If called recursively - the calling method/function containing after() is, itself,
 called by after() - each time through the recursion, after() simply waits again
 before re-calling the method/function. There's no delay in handling idle tasks.
+
+To see the recursive behaviour, uncomment line #32.
 '''
 from tkinter import *
 
@@ -27,6 +29,7 @@ class Window(Tk):
 		
 	def report(self):
 		print("Reporting after 1000 ms.")
+		## self.after(1000, self.report)
 
 if __name__ == "__main__":
 	main()

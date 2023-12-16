@@ -35,9 +35,9 @@ class EditMenu(Menu):
 		self.actions = window.actions
 		# menu items
 		# populate
-		self.add_command(label = "Copy", command = self.copy_stuff, accelerator = "(Ctrl-C)")
-		self.add_command(label = "Cut", command = self.cut_stuff, accelerator = "(Ctrl-X)")
-		self.add_command(label = "Paste", command = self.paste_stuff, accelerator = "(Ctrl-P)")
+		self.add_command(label = "Copy", command = self.actions.copy_stuff, accelerator = "(Ctrl-C)")
+		self.add_command(label = "Cut", command = self.actions.cut_stuff, accelerator = "(Ctrl-X)")
+		self.add_command(label = "Paste", command = self.actions.paste_stuff, accelerator = "(Ctrl-P)")
 
 class Actions():
 	def copy_stuff(self, event = None):

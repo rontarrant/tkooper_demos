@@ -25,8 +25,10 @@ class Window(Tk):
 
 		x_offset = self.sign(self.x_pos)
 		y_offset = self.sign(self.y_pos)
-		size_position = str(self.width) + "x" + str(self.height) + x_offset + str(self.x_pos) + y_offset + str(self.y_pos)
+		size_position = f"{self.width}x{self.height}{x_offset}{self.x_pos}{y_offset}{self.y_pos}"
 		self.geometry(size_position)
+		
+		print(f"{self.geometry()}")
 		self.update_idletasks()
 		print(f"{self.geometry()}")
 
